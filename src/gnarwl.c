@@ -83,6 +83,7 @@ int main(int argc, char **argv) {
 
   while(receivers[ch]!=NULL) {
     int i=0;
+    syslog(LOG_MAIL|LOG_DEBUG,"sender=%s, receivers[ch]=%s, ch=%d",sender,receivers[ch],ch);
     rep=dbQuery(receivers[ch]);
     while(rep[i]!=NULL) {
       if (dbCheck(sender,receivers[ch])) {
