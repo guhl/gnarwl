@@ -68,7 +68,8 @@ void parseHeader(const char* hl) {
   int i=0;
 
   tmp=splitString(hl,1,':');
-  syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader tmp[0]=%s, tmp[1]=%s",tmp[0],tmp[1]);
+//  if (verbose>=LVL_DEBUG)
+//	syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader tmp[0]=%s, tmp[1]=%s",tmp[0],tmp[1]);
   if (tmp[0]==NULL || tmp[1]==NULL) return;
   
   // Cosmetics: Strip leading space of header data
@@ -81,7 +82,8 @@ void parseHeader(const char* hl) {
     }
     else { cpyStr(&sender,tmp[1]); }
     mail_status=mail_status|MAIL_HAS_SENDER;
-    syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found sender: %s",sender);
+    if (verbose>=LVL_DEBUG)
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found sender: %s",sender);
   }
   
   if(!strcasecmp("reply-to",tmp[0]) && (mail_status&MAIL_PREDEF_SENDER)!=MAIL_PREDEF_SENDER && (mail_status&MAIL_HAS_SENDER)!=MAIL_HAS_SENDER) {
@@ -91,7 +93,8 @@ void parseHeader(const char* hl) {
     }
     else { cpyStr(&sender,tmp[1]); }
     mail_status=mail_status|MAIL_HAS_REPLYTO;
-    syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found reply-to: %s",sender);
+    if (verbose>=LVL_DEBUG)
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found reply-to: %s",sender);
   }
   
   if(!strcasecmp("from",tmp[0]) && (mail_status&MAIL_PREDEF_SENDER)!=MAIL_PREDEF_SENDER && (mail_status&MAIL_HAS_SENDER)!=MAIL_HAS_SENDER && (mail_status&MAIL_HAS_REPLYTO)!=MAIL_HAS_REPLYTO) {
@@ -100,7 +103,8 @@ void parseHeader(const char* hl) {
       mail_status=mail_status|MAIL_LACK;
     }
     else { cpyStr(&sender,tmp[1]); }
-    syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found from: %s",sender);
+    if (verbose>=LVL_DEBUG)
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found from: %s",sender);
   }
   
   if(!strcasecmp("subject",tmp[0])) {
