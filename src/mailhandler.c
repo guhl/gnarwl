@@ -67,8 +67,8 @@ void parseHeader(const char* hl) {
   char** tmp;
   int i=0;
 
-  syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader");
   tmp=splitString(hl,1,':');
+  syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader tmp[0]=%s, tmp[1]=%s",tmp[0],tmp[1]);
   if (tmp[0]==NULL || tmp[1]==NULL) return;
   
   // Cosmetics: Strip leading space of header data
