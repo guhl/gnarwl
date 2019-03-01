@@ -80,6 +80,9 @@ void parseHeader(const char* hl) {
     }
     else { cpyStr(&sender,tmp[1]); }
     mail_status=mail_status|MAIL_HAS_SENDER;
+    if (verbose>=LVL_DEBUG) {
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found sender: %s",sender);
+    }
   }
   
   if(!strcasecmp("reply-to",tmp[0]) && (mail_status&MAIL_PREDEF_SENDER)!=MAIL_PREDEF_SENDER && (mail_status&MAIL_HAS_SENDER)!=MAIL_HAS_SENDER) {
@@ -89,6 +92,9 @@ void parseHeader(const char* hl) {
     }
     else { cpyStr(&sender,tmp[1]); }
     mail_status=mail_status|MAIL_HAS_REPLYTO;
+    if (verbose>=LVL_DEBUG) {
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found reply-to: %s",sender);
+    }
   }
   
   if(!strcasecmp("from",tmp[0]) && (mail_status&MAIL_PREDEF_SENDER)!=MAIL_PREDEF_SENDER && (mail_status&MAIL_HAS_SENDER)!=MAIL_HAS_SENDER && (mail_status&MAIL_HAS_REPLYTO)!=MAIL_HAS_REPLYTO) {
@@ -97,6 +103,9 @@ void parseHeader(const char* hl) {
       mail_status=mail_status|MAIL_LACK;
     }
     else { cpyStr(&sender,tmp[1]); }
+    if (verbose>=LVL_DEBUG) {
+      syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL parseHeader found from: %s",sender);
+    }
   }
   
   if(!strcasecmp("subject",tmp[0])) {
