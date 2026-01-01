@@ -51,27 +51,27 @@
 /**
  * Status of the mail (calculated by ORing the above macros)
  */
-static int mail_status;
+extern int mail_status;
 
 /**
  * Message ID
  */
-static char* messageid;
+extern char* messageid;
 
 /**
  * sender of incomming mail (filled by receiveMail() )
  */
-static char* sender;
+extern char* sender;
 
 /**
  * subject of incomming mail (filled by receiveMail() )
  */
-static char* subject;
+extern char* subject;
 
 /**
  * receivers of incomming mail (filled by receiveMail() )
  */
-static char** receivers;
+extern char** receivers;
 
 /**
  * Parse a headerline

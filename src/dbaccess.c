@@ -22,9 +22,9 @@
 #endif
 
 extern struct conf cfg;
-extern char* sender;
-extern char** receivers;
-extern char* subject;
+// extern char* sender;
+// extern char** receivers;
+// extern char* subject;
 extern int verbose;
 
 /**

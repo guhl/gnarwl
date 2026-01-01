@@ -21,6 +21,30 @@
 #include <sys/syslog.h>
 #endif
 
+/**
+ * Status of the mail (calculated by ORing the above macros)
+ */
+int mail_status;
+
+/**
+ * Message ID
+ */
+char* messageid;
+
+/**
+ * sender of incomming mail (filled by receiveMail() )
+ */
+char* sender;
+
+/**
+ * subject of incomming mail (filled by receiveMail() )
+ */
+char* subject;
+
+/**
+ * receivers of incomming mail (filled by receiveMail() )
+ */
+char** receivers;
 
 extern int verbose;
 extern struct conf cfg;
