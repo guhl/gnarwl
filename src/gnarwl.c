@@ -79,8 +79,11 @@ int main(int argc, char **argv) {
   if (receiveMail(tmprecv,sndr)==FALSE) return EXIT_SUCCESS;
   
   ch=0;
+  syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL calling dbConnect()");
   dbConnect();
+  syslog(LOG_MAIL|LOG_DEBUG,"DEBUG/MAIL after dbConnect()");
 
+  syslog(LOG_MAIL|LOG_DEBUG,"looping receivers");
   while(receivers[ch]!=NULL) {
     int i=0;
     syslog(LOG_MAIL|LOG_DEBUG,"sender=%s, receivers[ch]=%s, ch=%d",sender,receivers[ch],ch);
